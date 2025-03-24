@@ -6,6 +6,7 @@ public record ClienteResponse(
         Long id,
         String nome,
         String email,
+        Integer idade,
         String telefone,
         String endereco
 ) {
@@ -14,6 +15,7 @@ public record ClienteResponse(
                 cliente.getId(),
                 cliente.getNome(),
                 cliente.getEmail(),
+                cliente.getIdade(),
                 cliente.getTelefone(),
                 cliente.getEndereco()
         );

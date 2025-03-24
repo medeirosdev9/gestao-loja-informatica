@@ -24,6 +24,9 @@ public class Cliente {
     @NotBlank
     private String telefone;
 
+    @NotNull
+    private Integer idade;
+
     @NotBlank
     private String endereco;
 }

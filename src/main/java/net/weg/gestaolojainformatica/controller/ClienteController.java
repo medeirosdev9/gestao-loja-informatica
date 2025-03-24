@@ -69,4 +69,40 @@ public class ClienteController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/filtro")
+    public ResponseEntity<Page<ClienteResponse>> findByEndereco(@RequestParam(required = false) String endereco, Pageable pageable) {
+        Page<ClienteResponse> clientes = clienteService.getByEndereco(endereco, pageable);
+        if (clientes.hasContent()) {
+            return new ResponseEntity<>(clientes, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/buscar-por-idade")
+    public ResponseEntity<Page<ClienteResponse>> findByIdade(@RequestParam(required = false) Integer idadeMin,
+                                                             @RequestParam(required = false) Integer idadeMax,
+            Pageable pageable) {
+        Page<ClienteResponse> clientes = clienteService.getByIdade(idadeMin, idadeMax, pageable);
+        if (clientes.hasContent()) {
+            return new ResponseEntity<>(clientes, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/filtrar")
+    public ResponseEntity<Page<ClienteResponse>> findByFiltros(
+            @RequestParam(required = false) String endereco,
+            @RequestParam(required = false) Integer idadeMin,
+            @RequestParam(required = false) Integer idadeMax,
+            Pageable pageable) {
+
+        Page<ClienteResponse> clientes = clienteService.getByFiltros(endereco, idadeMin, idadeMax, pageable);
+
+        if (clientes.hasContent()) {
+            return new ResponseEntity<>(clientes, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
